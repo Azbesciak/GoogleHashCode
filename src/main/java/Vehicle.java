@@ -7,6 +7,15 @@ class Vehicle implements Copyable<Vehicle>{
     boolean isInRide;
     final int ID;
     Point currentPosition;
+    Ride currentRide;
+
+    public void ride()
+    {
+        if(Math.abs(currentPosition.x - currentRide.destination.x) > 0)
+        {
+
+        }
+    }
     int currentTime;
 
     public String generateOutput() {

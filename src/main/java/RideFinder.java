@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +11,7 @@ public class RideFinder {
         {
             for(Ride ride : rides)
             {
-                Integer distance = RouteUtils.getDistance(vehicle.currentPosition, ride.destination);
+                int distance = RouteUtils.getDistance(vehicle.currentPosition, ride.destination);
                 if(distance < shortestDistance)
                 {
                     shortestDistance = distance;
@@ -20,6 +19,7 @@ public class RideFinder {
                 }
             }
         }
+        return null;
     }
 
     public void assignVehiclesToRides(List<Vehicle> vehicles, List<Ride> rides)
@@ -40,5 +40,23 @@ public class RideFinder {
 public class VehicleRide
 {
     Vehicle vehicle;
+        for(Ride ride : rides)
+        {
+            int distance = Integer.MAX_VALUE;
+            Vehicle chosenVehicle = null;
+            for(Vehicle vehicle : nonInRide)
+            {
+                int dis  = RouteUtils.getDistance(ride.destination, vehicle.currentPosition);
+                 if(dis < distance)
+                 {
+                     distance = dis;
+                     chosenVehicle = vehicle;
+                 }
+            }
+            ride.hasVehicle = true;
+            chosenVehicle.isInRide = true;
+            chosenVehicle.rides.add(ride);
+        }
+    }
 
 }
