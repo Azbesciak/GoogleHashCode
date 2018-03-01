@@ -30,6 +30,7 @@ public class RideFinder {
     }
 
     public List<Ride> create(List<Ride> toAssign, List<Vehicle> vehicles) {
+
         while (!toAssign.isEmpty()) {
 
         }

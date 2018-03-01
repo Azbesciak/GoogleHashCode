@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class Ride {
+class Ride implements Copyable<Ride>{
 
     final int ID;
     final Point source;
@@ -14,6 +14,18 @@ class Ride {
     int actualStart = -1;
     boolean done = false;
     boolean hasVehicle = false;
+
+    public Ride(int ID, Point source, Point destination, int earliestStart, int latestFinist, int routeLenght, int actualStart, boolean done, boolean hasVehicle) {
+        this.ID = ID;
+        this.source = source;
+        this.destination = destination;
+        this.earliestStart = earliestStart;
+        this.latestFinist = latestFinist;
+        this.routeLenght = routeLenght;
+        this.actualStart = actualStart;
+        this.done = done;
+        this.hasVehicle = hasVehicle;
+    }
 
     private Ride(int ID, Point source, Point destination, int earliestStart, int latestFinist) {
         this.ID = ID;
@@ -50,5 +62,8 @@ class Ride {
     }
 
 
-
+    @Override
+    public Ride copy() {
+        return new Ride(ID, source, destination, earliestStart, latestFinist, routeLenght, actualStart, done, hasVehicle);
+    }
 }
