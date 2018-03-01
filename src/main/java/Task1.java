@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import static java.lang.Integer.parseInt;
 
 public class Task1 {
+
     static  String getInstance(String file) {
         return "instances/" + file + ".in";
     }
@@ -22,7 +23,10 @@ public class Task1 {
             linesOfFile = lines.collect(Collectors.toList());
         }
         Task task = createTask(linesOfFile);
+        for(int T = 1; T <= task.T; T++)
+        {
 
+        }
         System.out.println(task);
     }
 
@@ -37,7 +41,7 @@ public class Task1 {
         int steps = parseInt(firstRow[5]);
         List<Ride> routes = readRoutes(linesOfFile);
         List<Vehicle> vehicles = initializeVehicles(vehiclesAmount);
-        return new Task(vehicles, routes);
+        return new Task(vehicles, routes, steps);
     }
 
     private static List<Ride> readRoutes(List<String> input) {

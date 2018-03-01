@@ -19,7 +19,6 @@ public class RideFinder {
                 }
             }
         }
-        return
     }
 
     public Integer getDistance(Vehicle vehicle, Ride ride)
