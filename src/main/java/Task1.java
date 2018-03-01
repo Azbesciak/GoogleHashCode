@@ -32,7 +32,7 @@ public class Task1 {
                 vehicle.ride();
             }
         }
-        System.out.println(task);
+        System.out.println(task.generateOutput());
     }
 
     private static Task createTask(List<String> linesOfFile) {
@@ -58,16 +58,5 @@ public class Task1 {
 
     private static List<Vehicle> initializeVehicles(int amount) {
         return IntStream.range(0, amount).mapToObj(Vehicle::new).collect(Collectors.toList());
-    }
-
-    public String generateOutput(List<Vehicle> vehicles)
-    {
-        StringBuilder output = new StringBuilder();
-        for(Vehicle vehicle:vehicles)
-        {
-            output.append(vehicle.generateOutput());
-        }
-
-        return output.toString();
     }
 }

@@ -10,6 +10,16 @@ class Task {
         this.routes = routes;
         this.T = steps;
     }
+    public String generateOutput()
+    {
+        StringBuilder output = new StringBuilder();
+        for(Vehicle vehicle : vehicles)
+        {
+            output.append(vehicle.generateOutput());
+        }
+
+        return output.toString();
+    }
 
     @Override
     public String toString() {

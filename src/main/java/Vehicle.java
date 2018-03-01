@@ -11,10 +11,29 @@ class Vehicle{
 
     public void ride()
     {
-        if(Math.abs(currentPosition.x - currentRide.destination.x) > 0)
+        if(currentRide == null)
         {
-
+            return;
         }
+        int xDiff = currentPosition.x - currentRide.destination.x;
+        boolean xPositiveDir = xDiff > 0;
+        if(Math.abs(xDiff) > 0)
+        {
+            this.currentPosition.x += xPositiveDir ? 1 : -1;
+            return;
+        }
+
+
+        int yDiff = currentPosition.y - currentRide.destination.y;
+        boolean yPositiveDir = yDiff > 0;
+        if(Math.abs(yDiff) > 0)
+        {
+            this.currentPosition.y += yPositiveDir ? 1 : -1;
+        }
+
+        //reached point
+        isInRide = false;
+        rides.add(currentRide);
     }
 
     public String generateOutput() {

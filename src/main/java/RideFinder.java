@@ -42,7 +42,6 @@ public class RideFinder {
             }
             ride.hasVehicle = true;
             chosenVehicle.isInRide = true;
-            chosenVehicle.rides.add(ride);
         }
     }
 
