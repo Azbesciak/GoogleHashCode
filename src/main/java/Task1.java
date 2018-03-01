@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,10 +32,13 @@ public class Task1 {
     }
 
     class Vehicle {
+        List<Route> rides = new ArrayList<>();
+        boolean isInRide;
 
     }
 
     class Route {
+        int ID;
         Point source;
         Point destination;
         int earliestStart;
