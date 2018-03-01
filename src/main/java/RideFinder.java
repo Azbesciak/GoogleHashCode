@@ -26,36 +26,25 @@ public class RideFinder {
     {
         List<Vehicle> nonInRide = vehicles.stream().filter(x -> !x.isInRide).collect(Collectors.toList());
         List<Ride> nonDoneRides = rides.stream().filter(x -> !x.hasVehicle).collect(Collectors.toList());
-
+        for(Ride ride : rides) {
+            Vehicle chosenVehicle = null;
+            int distance = Integer.MAX_VALUE;
+            for (Vehicle vehicle : nonInRide) {
+                int dis = RouteUtils.getDistance(ride.destination, vehicle.currentPosition);
+                if (dis < distance) {
+                    distance = dis;
+                    chosenVehicle = vehicle;
+                }
+            }
+            ride.hasVehicle = true;
+            chosenVehicle.isInRide = true;
+        }
     }
 
     public List<Ride> create(List<Ride> toAssign, List<Vehicle> vehicles) {
 
         while (!toAssign.isEmpty()) {
 
-        }
-    }
-
-}
-
-public class VehicleRide
-{
-    Vehicle vehicle;
-        for(Ride ride : rides)
-        {
-            int distance = Integer.MAX_VALUE;
-            Vehicle chosenVehicle = null;
-            for(Vehicle vehicle : nonInRide)
-            {
-                int dis  = RouteUtils.getDistance(ride.destination, vehicle.currentPosition);
-                 if(dis < distance)
-                 {
-                     distance = dis;
-                     chosenVehicle = vehicle;
-                 }
-            }
-            ride.hasVehicle = true;
-            chosenVehicle.isInRide = true;
         }
     }
 
