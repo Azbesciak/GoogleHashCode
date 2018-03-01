@@ -1,9 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,11 +11,14 @@ import java.util.stream.Stream;
 import static java.lang.Integer.parseInt;
 
 public class Task1 {
-    static String filePath = "";
+    static  String getInstance(String file) {
+        return "instances/" + file + ".in";
+    }
 
     public static void main(String[] args) throws IOException {
+        String fileName = "a_example";
         final List<String> linesOfFile;
-        try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
+        try (Stream<String> lines = Files.lines(Paths.get(getInstance(fileName)))) {
             linesOfFile = lines.collect(Collectors.toList());
         }
         Task task = createTask(linesOfFile);
