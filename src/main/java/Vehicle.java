@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class Vehicle{
+class Vehicle implements Copyable<Vehicle>{
     final List<Ride> rides;
     boolean isInRide;
     final int ID;
@@ -35,6 +35,7 @@ class Vehicle{
         isInRide = false;
         rides.add(currentRide);
     }
+    int currentTime;
 
     public String generateOutput() {
         StringBuilder output = new StringBuilder();
@@ -59,6 +60,22 @@ class Vehicle{
         this.currentPosition = currentPosition;
     }
 
+    Vehicle moveTo(Point point) {
+        Vehicle copy = copy();
+        copy.currentTime += RouteUtils.getDistance(currentPosition, point);
+        copy.currentPosition = point;
+        return copy;
+    }
+
+    Vehicle alignToRoute(Ride ride) {
+        Vehicle copy = copy();
+        if (ride.earliestStart > currentTime) {
+            copy.currentTime = ride.earliestStart;
+        }
+        copy.currentTime += ride.routeLenght;
+        return copy;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -69,8 +86,8 @@ class Vehicle{
                 '}';
     }
 
-//    @Override
-//    public Vehicle copy() {
-//        return new Vehicle(new ArrayList<>(rides), ID, isInRide, new Point(currentPosition.x, currentPosition.y));
-//    }
+    @Override
+    public Vehicle copy() {
+        return new Vehicle(new ArrayList<>(rides), isInRide, ID, new Point(currentPosition.x, currentPosition.y));
+    }
 }
