@@ -1,20 +1,33 @@
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.lang.Integer.parseInt;
 
 public class Task1 {
-    static Scanner scanner = new Scanner(System.in);
-    public static void main(String[] args) {
-        Task task = createTask();
+    static  String getInstance(String file) {
+        return "instances/" + file + ".in";
+    }
+
+    public static void main(String[] args) throws IOException {
+        String fileName = "a_example";
+        final List<String> linesOfFile;
+        try (Stream<String> lines = Files.lines(Paths.get(getInstance(fileName)))) {
+            linesOfFile = lines.collect(Collectors.toList());
+        }
+        Task task = createTask(linesOfFile);
+
         System.out.println(task);
     }
 
-    private static Task createTask() {
-        String s = scanner.nextLine();
+    private static Task createTask(List<String> linesOfFile) {
+        String s = linesOfFile.get(0);
         String[] firstRow = s.split("\\s");
         int rows = parseInt(firstRow[0]);
         int columns = parseInt(firstRow[1]);
@@ -22,20 +35,16 @@ public class Task1 {
         int rides = parseInt(firstRow[3]);
         int bonus = parseInt(firstRow[4]);
         int steps = parseInt(firstRow[5]);
-        List<Ride> routes = readRoutes(rides);
+        List<Ride> routes = readRoutes(linesOfFile);
         List<Vehicle> vehicles = initializeVehicles(vehiclesAmount);
         return new Task(vehicles, routes);
     }
 
-    private static List<Ride> readRoutes(int amount) {
-        int id = 0;
-        List<Ride> routes = new ArrayList<>();
-        while(amount-- > 0) {
-            String line = scanner.nextLine();
-            Ride route = Ride.create(line, id++);
-            routes.add(route);
-        }
-        return routes;
+    private static List<Ride> readRoutes(List<String> input) {
+        AtomicInteger id = new AtomicInteger(0);
+        return input.stream().skip(1)
+                .map(line -> Ride.create(line, id.incrementAndGet()))
+                .collect(Collectors.toList());
     }
 
     private static List<Vehicle> initializeVehicles(int amount) {
