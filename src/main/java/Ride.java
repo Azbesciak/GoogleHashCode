@@ -37,6 +37,10 @@ class Ride implements Copyable<Ride>{
 
     }
 
+    public int getCost() {
+        return actualStart + routeLenght;
+    }
+
     static Ride create(String input, int id) {
         List<Integer> f = Arrays.stream(input.split("\\s")).map(Integer::valueOf).collect(Collectors.toList());
         return new Ride(id, new Point(f.get(0), f.get(1)), new Point(f.get(2), f.get(3)), f.get(4), f.get(5));
@@ -46,7 +50,7 @@ class Ride implements Copyable<Ride>{
         return actualStart >= 0;
     }
 
-    boolean isCorect() {
+    boolean isCorrect() {
         return actualStart >= earliestStart && actualStart + routeLenght <= latestFinist;
     }
 

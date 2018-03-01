@@ -72,20 +72,16 @@ class Vehicle implements Copyable<Vehicle>{
         this.currentPosition = currentPosition;
     }
 
-    Vehicle moveTo(Point point) {
-        Vehicle copy = copy();
-        copy.currentTime += RouteUtils.getDistance(currentPosition, point);
-        copy.currentPosition = point;
-        return copy;
-    }
-
-    Vehicle alignToRoute(Ride ride) {
-        Vehicle copy = copy();
+    void assignRoute(Ride ride) {
         if (ride.earliestStart > currentTime) {
-            copy.currentTime = ride.earliestStart;
+            currentTime = ride.earliestStart;
         }
-        copy.currentTime += ride.routeLenght;
-        return copy;
+        if (ride.actualStart >= 0) {
+            throw new IllegalStateException("ROUTE STARTED ALREADY");
+        }
+        ride.actualStart = currentTime;
+        currentTime += ride.routeLenght;
+        currentPosition = ride.destination;
     }
 
     @Override
