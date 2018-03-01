@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Vehicle implements Copyable<Vehicle>{
-    final List<Ride> rides;
+    List<Ride> rides;
     boolean isInRide;
     final int ID;
     Point currentPosition;

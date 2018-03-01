@@ -20,7 +20,7 @@ public class Task1 {
 
     public static void main(String[] args) throws IOException {
         final List<String> linesOfFile;
-        try (Stream<String> lines = Files.lines(Paths.get(getInstance(1)))) {
+        try (Stream<String> lines = Files.lines(Paths.get(getInstance(4)))) {
             linesOfFile = lines.collect(Collectors.toList());
         }
         Task task = createTask(linesOfFile);
