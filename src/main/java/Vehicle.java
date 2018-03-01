@@ -8,13 +8,25 @@ class Vehicle implements Copyable<Vehicle>{
     final int ID;
     Point currentPosition;
     Ride currentRide;
+    boolean ridingOnRoad = false;
 
-    public void ride()
+    public void ride(int currentTime)
     {
         if(currentRide == null)
         {
             return;
         }
+        //check if we reached start already or not
+        if(!ridingOnRoad)
+        {
+            //start not yet reached
+            if(positionsEquals(currentPosition, currentRide.source))
+            {
+                ridingOnRoad = true;
+            }
+        }
+
+
         int xDiff = currentPosition.x - currentRide.destination.x;
         boolean xPositiveDir = xDiff > 0;
         if(Math.abs(xDiff) > 0)
@@ -84,6 +96,12 @@ class Vehicle implements Copyable<Vehicle>{
                 ", currentPosition=" + currentPosition +
                 ", id=" + ID +
                 '}';
+    }
+
+    public static boolean positionsEquals(Point posA, Point posB)
+    {
+            return posA.x == posB.x && posA.y == posB.y;
+
     }
 
     @Override

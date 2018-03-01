@@ -26,7 +26,8 @@ public class Task1 {
         RideFinder rideFinder = new RideFinder();
         for(int T = 1; T <= task.T; T++)
         {
-            rideFinder.findNearestRide(task.vehicles, task.routes);
+            rideFinder.assignVehiclesToRides(task.vehicles, task.routes, T);
+
             for(Vehicle vehicle : task.vehicles)
             {
                 vehicle.ride();

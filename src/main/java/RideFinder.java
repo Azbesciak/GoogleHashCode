@@ -22,22 +22,34 @@ public class RideFinder {
         return null;
     }
 
-    public void assignVehiclesToRides(List<Vehicle> vehicles, List<Ride> rides)
+    public void assignVehiclesToRides(List<Vehicle> vehicles, List<Ride> rides, int currentTime)
     {
-        List<Vehicle> nonInRide = vehicles.stream().filter(x -> !x.isInRide).collect(Collectors.toList());
+        List<Vehicle> nonInRide = null;
         List<Ride> nonDoneRides = rides.stream().filter(x -> !x.hasVehicle).collect(Collectors.toList());
-        for(Ride ride : rides) {
+        for(Ride ride : nonDoneRides) {
+
+            nonInRide = vehicles.stream().filter(x -> !x.isInRide).collect(Collectors.toList());    //if vehicle was chosen
+            if(nonInRide.size() < 1)
+            {
+                return;
+            }
             Vehicle chosenVehicle = null;
             int distance = Integer.MAX_VALUE;
             for (Vehicle vehicle : nonInRide) {
                 int dis = RouteUtils.getDistance(ride.destination, vehicle.currentPosition);
-                if (dis < distance) {
+                if (dis < distance && dis < ride.latestFinist - currentTime ) {
                     distance = dis;
                     chosenVehicle = vehicle;
                 }
             }
-            ride.hasVehicle = true;
-            chosenVehicle.isInRide = true;
+            if(chosenVehicle != null)
+            {
+                ride.hasVehicle = true;
+                chosenVehicle.isInRide = true;
+                chosenVehicle.currentRide = ride;
+            }
+
+            nonDoneRides = rides.stream().filter(x -> !x.hasVehicle).collect(Collectors.toList());
         }
     }
 
@@ -46,6 +58,7 @@ public class RideFinder {
         while (!toAssign.isEmpty()) {
 
         }
+        return null;
     }
 
 }
