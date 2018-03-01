@@ -23,6 +23,12 @@ public class Task1 {
             linesOfFile = lines.collect(Collectors.toList());
         }
         Task task = createTask(linesOfFile);
+        JTFun(task);
+//        WKFun(task);
+    }
+
+
+    private static void JTFun(Task task) {
         RideFinder rideFinder = new RideFinder();
         for(int T = 1; T <= task.T; T++)
         {
@@ -35,6 +41,11 @@ public class Task1 {
         }
         System.out.println(task.generateOutput());
     }
+
+    private static void WKFun(Task task) {
+
+    }
+
 
     private static Task createTask(List<String> linesOfFile) {
         String s = linesOfFile.get(0);
