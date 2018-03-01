@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,21 +21,32 @@ public class Task1 {
         int bonus = parseInt(firstRow[4]);
         int steps = parseInt(firstRow[5]);
 
-
     }
 
-    private static List<Route> readRoutes() {
+    private static List<Ride> readRoutes() {
         int id = 0;
-        List<Route> routes = new ArrayList<>();
+        List<Ride> routes = new ArrayList<>();
         while(scanner.hasNext()) {
             String line = scanner.nextLine();
-            Route route = Route.create(line, id++);
+            Ride route = Ride.create(line, id++);
             routes.add(route);
         }
         return routes;
 
 
 
+
     }
 
+    public void generateOutput(List<Vehicle> vehicles)
+    {
+        StringBuilder output = new StringBuilder();
+        for(Vehicle vehicle:vehicles)
+        {
+            for(Ride route: vehicle.rides)
+            {
+                output.append(String.format("%d", route.ID));
+            }
+        }
+    }
 }
