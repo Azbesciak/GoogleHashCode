@@ -49,7 +49,7 @@ public class Task1 {
         return IntStream.range(0, amount).mapToObj(Vehicle::new).collect(Collectors.toList());
     }
 
-    public void generateOutput(List<Vehicle> vehicles)
+    public String generateOutput(List<Vehicle> vehicles)
     {
         StringBuilder output = new StringBuilder();
         for(Vehicle vehicle:vehicles)
@@ -57,6 +57,6 @@ public class Task1 {
             output.append(vehicle.generateOutput());
         }
 
-        System.out.println(output);
+        return output.toString();
     }
 }
