@@ -12,7 +12,7 @@ public class RideFinder {
         {
             for(Ride ride : rides)
             {
-                Integer distance = getDistance(vehicle.currentPosition, ride.destination);
+                Integer distance = RouteUtils.getDistance(vehicle.currentPosition, ride.destination);
                 if(distance < shortestDistance)
                 {
                     shortestDistance = distance;
@@ -27,6 +27,12 @@ public class RideFinder {
         List<Vehicle> nonInRide = vehicles.stream().filter(x -> !x.isInRide).collect(Collectors.toList());
         List<Ride> nonDoneRides = rides.stream().filter(x -> !x.hasVehicle).collect(Collectors.toList());
 
+    }
+
+    public List<Ride> create(List<Ride> toAssign, List<Vehicle> vehicles) {
+        while (!toAssign.isEmpty()) {
+
+        }
     }
 
 }
