@@ -8,7 +8,6 @@ public class Task1 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
 
-
     }
 
     private static Task createTask() {
@@ -43,10 +42,9 @@ public class Task1 {
         StringBuilder output = new StringBuilder();
         for(Vehicle vehicle:vehicles)
         {
-            for(Ride route: vehicle.rides)
-            {
-                output.append(String.format("%d", route.ID));
-            }
+            output.append(vehicle.generateOutput());
         }
+
+        System.out.println(output);
     }
 }
