@@ -57,17 +57,16 @@ public class RideFinder {
         }
     }
 
-    public List<Ride> findRoute(List<Ride> rides, List<Vehicle> vehicles) {
+    public List<Vehicle> findRoute(List<Ride> rides, List<Vehicle> vehicles) {
         while (true) {
-            List<Ride> result = create(rides, vehicles);
+            List<Vehicle> result = create(rides, vehicles);
             if (getCost(result) < INFINITE_COST) {
                 return result;
             }
         }
     }
 
-    public List<Ride> create(List<Ride> rides, final List<Vehicle> vehicles) {
-        ArrayList<Ride> result = new ArrayList<>();
+    private List<Vehicle> create(List<Ride> rides, final List<Vehicle> vehicles) {
         List<Vehicle> vehCopy = vehicles.stream().map(Vehicle::copy).collect(Collectors.toList());
         List<Ride> toAssign = rides.stream().map(Ride::copy).collect(Collectors.toList());
         Random random = new Random();
@@ -75,17 +74,17 @@ public class RideFinder {
             Ride route = toAssign.remove(random.nextInt(toAssign.size()));
             Vehicle vehicle = vehCopy.get(random.nextInt(vehicles.size()));
             vehicle.assignRoute(route);
-            result.add(route);
         }
-        return result;
+        return vehCopy;
     }
 
 
-    public int getCost(List<Ride> rides) {
-        if (!rides.stream().allMatch(Ride::isCorrect)) {
+    public int getCost(List<Vehicle> rides) {
+        List<Ride> routes = rides.stream().flatMap(v -> v.rides.stream()).collect(Collectors.toList());
+        if (!routes.stream().allMatch(Ride::isCorrect)) {
             return INFINITE_COST;
         }
-        return rides.stream().mapToInt(Ride::getCost).sum();
+        return routes.stream().mapToInt(Ride::getCost).sum();
 
     }
 

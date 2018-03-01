@@ -82,6 +82,7 @@ class Vehicle implements Copyable<Vehicle>{
         ride.actualStart = currentTime;
         currentTime += ride.routeLenght;
         currentPosition = ride.destination;
+        rides.add(ride);
     }
 
     @Override

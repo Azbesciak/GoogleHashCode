@@ -10,6 +10,13 @@ class Task {
         this.routes = routes;
         this.T = steps;
     }
+
+    public Task(List<Ride> routes, List<Vehicle> vehicles) {
+        this.routes = routes;
+        this.vehicles = vehicles;
+        T = 0;
+    }
+
     public String generateOutput()
     {
         StringBuilder output = new StringBuilder();

@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -12,38 +13,40 @@ import static java.lang.Integer.parseInt;
 
 public class Task1 {
 
-    static  String getInstance(String file) {
-        return "instances/" + file + ".in";
+    static final List<String> files = Arrays.asList("a_example", "b_should_be_easy", "c_no_hurry", "d_metropolis", "e_high_bonus");
+    static  String getInstance(int index) {
+        return "instances/" + files.get(index) + ".in";
     }
 
     public static void main(String[] args) throws IOException {
-        String fileName = "a_example";
         final List<String> linesOfFile;
-        try (Stream<String> lines = Files.lines(Paths.get(getInstance(fileName)))) {
+        try (Stream<String> lines = Files.lines(Paths.get(getInstance(1)))) {
             linesOfFile = lines.collect(Collectors.toList());
         }
         Task task = createTask(linesOfFile);
-        JTFun(task);
-//        WKFun(task);
+//        JTFun(task);
+        WKFun(task);
     }
 
 
     private static void JTFun(Task task) {
         RideFinder rideFinder = new RideFinder();
-        for(int T = 1; T <= task.T; T++)
+        for(int t = 1; t <= task.T; t++)
         {
-            rideFinder.assignVehiclesToRides(task.vehicles, task.routes, T);
+            rideFinder.assignVehiclesToRides(task.vehicles, task.routes, t);
 
             for(Vehicle vehicle : task.vehicles)
             {
-                vehicle.ride();
+                vehicle.ride(t);
             }
         }
         System.out.println(task.generateOutput());
     }
 
     private static void WKFun(Task task) {
-
+        RideFinder rideFinder = new RideFinder();
+        List<Vehicle> vehicles = rideFinder.findRoute(task.routes, task.vehicles);
+        vehicles.stream().map(Vehicle::generateOutput).forEach(System.out::println);
     }
 
 
