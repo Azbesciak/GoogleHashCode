@@ -10,6 +10,7 @@ class Ride {
     final Point destination;
     final int earliestStart;
     final int latestFinist;
+    boolean done = false;
 
     private Ride(int ID, Point source, Point destination, int earliestStart, int latestFinist) {
         this.ID = ID;

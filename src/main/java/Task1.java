@@ -23,9 +23,10 @@ public class Task1 {
             linesOfFile = lines.collect(Collectors.toList());
         }
         Task task = createTask(linesOfFile);
+        RideFinder rideFinder = new RideFinder();
         for(int T = 1; T <= task.T; T++)
         {
-
+            rideFinder.findNearestRide();
         }
         System.out.println(task);
     }

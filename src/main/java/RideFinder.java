@@ -21,6 +21,11 @@ public class RideFinder {
         }
     }
 
+    public void assignVehiclesToRides(List<Vehicle> vehicles, List<Ride> rides)
+    {
+        List<>
+    }
+
     public Integer getDistance(Vehicle vehicle, Ride ride)
     {
         return Math.abs(vehicle.currentPosition.x - ride.destination.x) + Math.abs(vehicle.currentPosition.y - ride.destination.y);
