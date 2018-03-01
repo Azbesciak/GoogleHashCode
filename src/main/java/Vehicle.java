@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class Vehicle {
+class Vehicle{
     final List<Ride> rides;
     boolean isInRide;
     final int ID;
@@ -24,6 +24,13 @@ class Vehicle {
         currentPosition = new Point(0, 0);
     }
 
+    public Vehicle(List<Ride> rides, boolean isInRide, int ID, Point currentPosition) {
+        this.rides = rides;
+        this.isInRide = isInRide;
+        this.ID = ID;
+        this.currentPosition = currentPosition;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -33,4 +40,9 @@ class Vehicle {
                 ", id=" + ID +
                 '}';
     }
+
+//    @Override
+//    public Vehicle copy() {
+//        return new Vehicle(new ArrayList<>(rides), ID, isInRide, new Point(currentPosition.x, currentPosition.y));
+//    }
 }

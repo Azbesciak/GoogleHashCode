@@ -29,10 +29,6 @@ public class RideFinder {
 
     }
 
-    public static Integer getDistance(Point startPoint, Point destPoint)
-    {
-        return Math.abs(startPoint.x - destPoint.x) + Math.abs(startPoint.y - destPoint.y);
-    }
 }
 
 public class VehicleRide
