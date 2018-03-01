@@ -7,6 +7,15 @@ class Vehicle{
     boolean isInRide;
     final int ID;
     Point currentPosition;
+    Ride currentRide;
+
+    public void ride()
+    {
+        if(Math.abs(currentPosition.x - currentRide.destination.x) > 0)
+        {
+
+        }
+    }
 
     public String generateOutput() {
         StringBuilder output = new StringBuilder();
