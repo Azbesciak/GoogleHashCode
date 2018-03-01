@@ -6,13 +6,13 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class Task1 {
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
 
 
     }
 
-    private Task createTask() {
-        Scanner scanner = new Scanner(System.in);
+    private static Task createTask() {
         String s = scanner.nextLine();
         String[] firstRow = s.split("\\s");
         int rows = parseInt(firstRow[0]);
@@ -25,23 +25,18 @@ public class Task1 {
 
     }
 
+    private static List<Route> readRoutes() {
+        int id = 0;
+        List<Route> routes = new ArrayList<>();
+        while(scanner.hasNext()) {
+            String line = scanner.nextLine();
+            Route route = Route.create(line, id++);
+            routes.add(route);
+        }
+        return routes;
 
-    class Task {
-        List<Vehicle> vehicles;
-        List<Route> routes;
+
+
     }
 
-    class Vehicle {
-        List<Route> rides = new ArrayList<>();
-        boolean isInRide;
-
-    }
-
-    class Route {
-        int ID;
-        Point source;
-        Point destination;
-        int earliestStart;
-        int latestFinist;
-    }
 }
