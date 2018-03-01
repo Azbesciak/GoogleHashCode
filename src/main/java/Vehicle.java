@@ -1,21 +1,36 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 class Vehicle {
-        List<Ride> rides = new ArrayList<>();
-        boolean isInRide;
-        int ID;
+    final List<Ride> rides;
+    boolean isInRide;
+    final int ID;
+    Point currentPosition;
 
-
-        public String generateOutput()
-        {
-            StringBuilder output = new StringBuilder();
-            output.append(ID);
-            output.append(' ');
-            for(int i = 0; i < rides.size();i++)
-            {
-                output.append(String.format("%d", rides.get(i).ID) + (i == rides.size() - 1 ? "" : " ") );
-            }
-            return output.toString();
+    public String generateOutput() {
+        StringBuilder output = new StringBuilder();
+        output.append(ID);
+        output.append(' ');
+        for (int i = 0; i < rides.size(); i++) {
+            output.append(String.format("%d", rides.get(i).ID)).append(i == rides.size() - 1 ? "" : " ");
         }
+        return output.toString();
+    }
+
+    public Vehicle(int id) {
+        this.rides = new ArrayList<>();
+        this.ID = id;
+        currentPosition = new Point(0, 0);
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "rides=" + rides +
+                ", isInRide=" + isInRide +
+                ", currentPosition=" + currentPosition +
+                ", id=" + ID +
+                '}';
+    }
 }

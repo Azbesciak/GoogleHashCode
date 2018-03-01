@@ -24,5 +24,14 @@ class Ride {
         return new Ride(id, new Point(f.get(0), f.get(1)), new Point(f.get(2), f.get(3)), f.get(4), f.get(5));
     }
 
-
+    @Override
+    public String toString() {
+        return "Ride{" +
+                "ID=" + ID +
+                ", source=" + source +
+                ", destination=" + destination +
+                ", earliestStart=" + earliestStart +
+                ", latestFinist=" + latestFinist +
+                '}';
+    }
 }
