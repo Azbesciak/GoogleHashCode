@@ -1,3 +1,4 @@
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +21,7 @@ public class Task1 {
 
     public static void main(String[] args) throws IOException {
         final List<String> linesOfFile;
-        try (Stream<String> lines = Files.lines(Paths.get(getInstance(4)))) {
+        try (Stream<String> lines = Files.lines(Paths.get(getInstance(0)))) {
             linesOfFile = lines.collect(Collectors.toList());
         }
         Task task = createTask(linesOfFile);
@@ -46,7 +47,8 @@ public class Task1 {
     private static void WKFun(Task task) {
         RideFinder rideFinder = new RideFinder();
         List<Vehicle> vehicles = rideFinder.findRoute(task.routes, task.vehicles);
-        vehicles.stream().map(Vehicle::generateOutput).forEach(System.out::println);
+        String collect = vehicles.stream().map(Vehicle::generateOutput).collect(Collectors.joining("\n"));
+        System.out.println(collect);
     }
 
 
@@ -67,11 +69,11 @@ public class Task1 {
     private static List<Ride> readRoutes(List<String> input) {
         AtomicInteger id = new AtomicInteger(0);
         return input.stream().skip(1)
-                .map(line -> Ride.create(line, id.incrementAndGet()))
+                .map(line -> Ride.create(line, id.getAndIncrement()))
                 .collect(Collectors.toList());
     }
 
     private static List<Vehicle> initializeVehicles(int amount) {
-        return IntStream.range(0, amount).mapToObj(Vehicle::new).collect(Collectors.toList());
+        return IntStream.range(1, amount+1).mapToObj(Vehicle::new).collect(Collectors.toList());
     }
 }

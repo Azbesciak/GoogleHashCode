@@ -51,7 +51,7 @@ class Vehicle implements Copyable<Vehicle>{
 
     public String generateOutput() {
         StringBuilder output = new StringBuilder();
-        output.append(ID);
+        output.append(rides.size());
         output.append(' ');
         for (int i = 0; i < rides.size(); i++) {
             output.append(String.format("%d", rides.get(i).ID)).append(i == rides.size() - 1 ? "" : " ");
